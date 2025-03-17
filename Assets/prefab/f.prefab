@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 567564570741738585}
   - component: {fileID: -1186582730895141694}
   - component: {fileID: 8732005941977506471}
+  - component: {fileID: 4926217255838704135}
   m_Layer: 0
   m_Name: f
   m_TagString: Untagged
@@ -145,6 +146,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 567564570741738585}
+  - {fileID: 4926217255838704135}
   ForceRemoteRenderTimeframe: 0
 --- !u!143 &8732005941977506471
 CharacterController:
@@ -172,3 +174,17 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4926217255838704135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965790708287596447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9b756fa62278a48a51e5a0f4dd0a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 8732005941977506471}
+  speed: 5
