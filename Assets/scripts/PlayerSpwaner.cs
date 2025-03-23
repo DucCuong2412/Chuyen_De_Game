@@ -21,3 +21,4 @@ public class PlayerSpwaner : SimulationBehaviour, IPlayerJoined
         }
     }
 }
+

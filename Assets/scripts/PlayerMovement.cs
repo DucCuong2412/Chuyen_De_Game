@@ -14,6 +14,10 @@ public class PlayerMovement : NetworkBehaviour
         var vertical = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(horizontal, 0, vertical);
         controller.Move(move * speed * Runner.DeltaTime);
+     
     }
 
+
+
 }
+

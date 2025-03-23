@@ -5,11 +5,42 @@ using UnityEngine;
 
 public class CameraFlow : MonoBehaviour
 {
-    public CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera virtualCamera, virtualCamera2, virtualCamera3;
+
 
     public void AsighCamera(Transform Playertranfrorm)
     {
+
+        virtualCamera.Priority = 10;
+        virtualCamera2.Priority = 0;
+        virtualCamera3.Priority = 0;
+
         virtualCamera.Follow = Playertranfrorm;
         virtualCamera.LookAt = Playertranfrorm;
+        Debug.Log("1111111111111111");
+
     }
+    public void AsighCamera2(Transform Playertranfrorm)
+    {
+        virtualCamera.Priority = 0;
+        virtualCamera2.Priority = 10;
+        virtualCamera3.Priority = 0;
+
+        virtualCamera2.Follow =  Playertranfrorm;
+        virtualCamera2.LookAt = Playertranfrorm;
+        Debug.Log("2222222222");
+    }
+    public void AsighCamera3(Transform Playertranfrorm)
+    {
+        virtualCamera.Priority = 0;
+        virtualCamera2.Priority = 0;
+        virtualCamera3.Priority = 10;
+
+        virtualCamera3.Follow = Playertranfrorm;
+        virtualCamera3.LookAt = Playertranfrorm;
+        Debug.Log("3333333333333333");
+    }
+
+
 }
+
