@@ -26,7 +26,7 @@ public class CameraFlow : MonoBehaviour
         virtualCamera2.Priority = 10;
         virtualCamera3.Priority = 0;
 
-        virtualCamera2.Follow =  Playertranfrorm;
+       // virtualCamera2.Follow =  Playertranfrorm;
         virtualCamera2.LookAt = Playertranfrorm;
         Debug.Log("2222222222");
     }
@@ -36,7 +36,7 @@ public class CameraFlow : MonoBehaviour
         virtualCamera2.Priority = 0;
         virtualCamera3.Priority = 10;
 
-        virtualCamera3.Follow = Playertranfrorm;
+       // virtualCamera3.Follow = Playertranfrorm;
         virtualCamera3.LookAt = Playertranfrorm;
         Debug.Log("3333333333333333");
     }
