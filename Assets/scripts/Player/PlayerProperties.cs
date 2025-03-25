@@ -14,7 +14,10 @@ public class PlayerProperties : NetworkBehaviour
     {
         Slider.value = health;
         Debug.Log($" heath changed to {health}");
-
+        if (health <= 0)
+        {
+            Debug.Log("player is dead");
+        }
     }
     private void Start()
     {
@@ -32,5 +35,11 @@ public class PlayerProperties : NetworkBehaviour
         }
 
     }
-
+    public void TakeDamege(int Damage)
+    {
+        if (HasInputAuthority)
+        {
+            health = Mathf.Max(0, health - Damage);
+        }
+    }
 }
