@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 449903842198483693}
   - component: {fileID: 8767132627628727991}
   m_Layer: 0
-  m_Name: player
+  m_Name: player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 590666152
+  SortKey: 1491682610
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8732005941977506471}
+  speedRotate: 10
   speed: 5
 --- !u!114 &449903842198483693
 MonoBehaviour:

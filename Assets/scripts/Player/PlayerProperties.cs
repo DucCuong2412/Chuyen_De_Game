@@ -35,6 +35,21 @@ public class PlayerProperties : NetworkBehaviour
         }
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Object.HasInputAuthority)
+        {
+            if (other.gameObject.CompareTag("at"))
+            {
+                // var targetPlayer = other.gameObject.GetComponent<NetworkObject>().InputAuthority;
+                //TakeDamege(10);
+                health -= 10;
+
+                Debug.Log("heal-=10");
+            }
+        }
+
+    }
     public void TakeDamege(int Damage)
     {
         if (HasInputAuthority)

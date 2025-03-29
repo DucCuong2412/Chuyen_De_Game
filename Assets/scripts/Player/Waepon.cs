@@ -28,6 +28,7 @@ public class Waepon : NetworkBehaviour
             var targetPlayer=other.gameObject.GetComponent<NetworkObject>().InputAuthority;
             RpcApplyDameToPlayer(targetPlayer, 10);
         }
+      
     }
 
     public void RpcApplyDameToPlayer(PlayerRef targetPlayer,int damege)

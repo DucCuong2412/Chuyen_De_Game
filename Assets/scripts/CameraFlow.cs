@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class CameraFlow : MonoBehaviour
 {
-    public CinemachineVirtualCamera virtualCamera, virtualCamera2, virtualCamera3;
+    public CinemachineFreeLook virtualCamera;
+    public CinemachineVirtualCamera  virtualCamera2, virtualCamera3;
+
 
 
     public void AsighCamera(Transform Playertranfrorm)
