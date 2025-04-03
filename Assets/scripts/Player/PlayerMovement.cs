@@ -1,11 +1,13 @@
 using Fusion;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovement : NetworkBehaviour
 {
     public CharacterController controller;
     private Animator animator;
     public int speedRotate = 10;
+    private Vector3 move;
 
 
     public float speed = 5f;
@@ -15,38 +17,30 @@ public class PlayerMovement : NetworkBehaviour
         animator = GetComponent<Animator>();
 
     }
+
     public override void FixedUpdateNetwork()
     {
-        //base.FixedUpdateNetwork();
         if (!Object.HasInputAuthority) return;
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(horizontal, 0, vertical);
-        controller.Move(move * speed * Runner.DeltaTime);
-        if (horizontal != 0 || vertical != 0)
-        {
-            animator.SetTrigger("Run");
 
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+         move = new Vector3(horizontal, 0, vertical);
+        PlayerMoving();
+        //gravity
+        controller.Move(Vector3.down * 5 * Runner.DeltaTime);
+    }
 
-
-
-        }
-        else
-        {
-            //   animator.SetBool("Run",false);
-            animator.SetTrigger("Ide");
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            animator.SetTrigger("Atk");
-        }
-        if (horizontal != 0 || vertical != 0)
+    private void PlayerMoving()
+    {
+        if (move.sqrMagnitude >= 0.001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, speedRotate * Runner.DeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Runner.DeltaTime);
         }
-
+        controller.Move(move * speed * Runner.DeltaTime);
+       // AnimationSpeed = controller.velocity.magnitude;
     }
+
 
 
 
