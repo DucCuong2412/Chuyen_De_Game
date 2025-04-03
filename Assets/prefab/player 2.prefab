@@ -384,7 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8732005941977506471}
   speedRotate: 10
-  speed: 5
+  speed: 10
 --- !u!114 &449903842198483693
 MonoBehaviour:
   m_ObjectHideFlags: 0

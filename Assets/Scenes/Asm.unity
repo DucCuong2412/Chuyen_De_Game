@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8628a90a65b6ac342afb5f1563f7d660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 6043792378673667206, guid: 9d40a2dbe5b5f424b9c69f966bd3dab6, type: 3}
+  PlayerPrefab: {fileID: 4938727032040027868, guid: 661ea0124edb35949aa8c4e5ac9be4b7, type: 3}
 --- !u!114 &323059269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,7 +1253,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 28.838, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.827, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0

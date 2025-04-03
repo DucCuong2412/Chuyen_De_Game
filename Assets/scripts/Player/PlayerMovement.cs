@@ -1,11 +1,10 @@
 using Fusion;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovement : NetworkBehaviour
 {
     public CharacterController controller;
-    private Animator animator;
+    public Animator animator;
     public int speedRotate = 10;
     private Vector3 move;
 
@@ -15,6 +14,8 @@ public class PlayerMovement : NetworkBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+      
+
 
     }
 
@@ -24,10 +25,19 @@ public class PlayerMovement : NetworkBehaviour
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-         move = new Vector3(horizontal, 0, vertical);
+        move = new Vector3(horizontal, 0, vertical);
         PlayerMoving();
         //gravity
-        controller.Move(Vector3.down * 5 * Runner.DeltaTime);
+        //controller.Move(Vector3.down * 5 * Runner.DeltaTime);
+        //if (horizontal != 0 || vertical != 0)
+        //{
+        //    animator.SetTrigger("Run");
+        //}
+        //else
+        //{
+        //    animator.SetTrigger("Ide");
+
+        //}
     }
 
     private void PlayerMoving()
@@ -38,7 +48,7 @@ public class PlayerMovement : NetworkBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Runner.DeltaTime);
         }
         controller.Move(move * speed * Runner.DeltaTime);
-       // AnimationSpeed = controller.velocity.magnitude;
+        // AnimationSpeed = controller.velocity.magnitude;
     }
 
 
