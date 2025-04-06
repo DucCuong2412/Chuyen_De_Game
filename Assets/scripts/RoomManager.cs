@@ -26,7 +26,8 @@ public class RoomManager : NetworkBehaviour
 
     public PlayerMovement player;
 
-    [Networked] public NetworkBool isStartGame { get; set; }
+    [Networked]
+    public bool isStartGame { get; set; }
 
     //public bool isStartGame = false;
 

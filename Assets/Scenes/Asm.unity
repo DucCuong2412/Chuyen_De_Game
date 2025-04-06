@@ -680,7 +680,8 @@ MonoBehaviour:
   object1: {fileID: 1252103370025742, guid: c69ca5d4562934b8c8d61b46a4214978, type: 3}
   object2: {fileID: 1748299038737836, guid: 2177dc4f0f0bf4715a8307d8c5d17d2f, type: 3}
   player: {fileID: 5187368047548505326, guid: 661ea0124edb35949aa8c4e5ac9be4b7, type: 3}
-  isStartGame: 0
+  _isStartGame:
+    _value: 0
 --- !u!4 &393205239
 Transform:
   m_ObjectHideFlags: 0
@@ -2174,7 +2175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e24b85dba2374946b640de004822455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 0}
+  virtualCamera: {fileID: 704016656}
   virtualCamera2: {fileID: 1396073076}
   virtualCamera3: {fileID: 1308892751}
 --- !u!1 &1396073074
@@ -2262,7 +2263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e24b85dba2374946b640de004822455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 0}
+  virtualCamera: {fileID: 704016656}
   virtualCamera2: {fileID: 1396073076}
   virtualCamera3: {fileID: 1308892751}
 --- !u!1 &1412123634

@@ -1,4 +1,4 @@
-using Fusion;
+﻿using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerProperties : NetworkBehaviour
 {
-    [Networked,OnChangedRender(nameof(OnHealthChanged))]
+    [Networked, OnChangedRender(nameof(OnHealthChanged))]
 
-    private int health {  get; set; }
+    private int health { get; set; }
     public Slider Slider;
     private void OnHealthChanged()
     {
@@ -32,7 +32,20 @@ public class PlayerProperties : NetworkBehaviour
             {
                 health -= 10;
             }
+
+            if (health <= 0)
+            {
+
+                takeDie();
+            }
+
+
+
         }
+
+
+
+
 
     }
     private void OnTriggerEnter(Collider other)
@@ -47,8 +60,59 @@ public class PlayerProperties : NetworkBehaviour
 
                 Debug.Log("heal-=10");
             }
+
         }
 
+    }
+
+
+
+    public IEnumerator die()
+    {
+        Debug.Log("animation die Is on===========");
+
+        yield return new WaitForSeconds(3);
+
+        // Tìm player khác còn sống
+        var other = FindOtherAlivePlayer();
+        if (other != null)
+        {
+            Debug.Log("Switching camera to another alive player");
+
+            // Lấy CameraFlow
+            var camFlow = FindFirstObjectByType<CameraFlow>();
+            if (camFlow != null)
+            {
+                camFlow.AsighCamera(other.transform);
+                ///cho gán mỗi cam freelock thoi
+
+               // camFlow.AsighCamera2(other.transform);
+              //  camFlow.AsighCamera3(other.transform);
+
+            }
+        }
+        else
+        {
+            Debug.Log("chả làm gì cả vì không tìm thấy player khác");
+        }
+
+        Destroy(gameObject);
+    }
+
+
+    private PlayerProperties FindOtherAlivePlayer()
+    {
+        var all = FindObjectsOfType<PlayerProperties>();
+
+        foreach (var p in all)
+        {
+            if (p != this && p.health > 0)
+            {
+                return p;
+            }
+        }
+
+        return null;
     }
     public void TakeDamege(int Damage)
     {
@@ -56,5 +120,12 @@ public class PlayerProperties : NetworkBehaviour
         {
             health = Mathf.Max(0, health - Damage);
         }
+    }
+
+
+    public void takeDie()
+    {
+        StartCoroutine(die());
+
     }
 }
