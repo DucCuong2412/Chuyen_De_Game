@@ -1808,6 +1808,7 @@ GameObject:
   - component: {fileID: 5187368047548505326}
   - component: {fileID: 4736473966917787560}
   - component: {fileID: 8108736189254714889}
+  - component: {fileID: 2276314259286943869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1989,6 +1990,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slider: {fileID: 7635844488563414270}
+--- !u!114 &2276314259286943869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4938727032040027868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0870efd0732c4b4ba98b23c29255320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5050403926983025904
 GameObject:
   m_ObjectHideFlags: 0

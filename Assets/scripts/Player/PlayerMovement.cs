@@ -7,6 +7,8 @@ public class PlayerMovement : NetworkBehaviour
     public Animator animator;
     public int speedRotate = 10;
     private Vector3 move;
+    public RoomManager roomManager;
+
 
 
     public float speed = 5f;
@@ -14,30 +16,30 @@ public class PlayerMovement : NetworkBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-      
-
+        roomManager=FindAnyObjectByType<RoomManager>();
 
     }
-
+    private void Update()
+    {
+        Debug.Log(roomManager.isStartGame);
+        
+    }
     public override void FixedUpdateNetwork()
     {
         if (!Object.HasInputAuthority) return;
+        if (roomManager.isStartGame == false)
+        { return; }
+        else
+        {
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        move = new Vector3(horizontal, 0, vertical);
-        PlayerMoving();
-        //gravity
-        //controller.Move(Vector3.down * 5 * Runner.DeltaTime);
-        //if (horizontal != 0 || vertical != 0)
-        //{
-        //    animator.SetTrigger("Run");
-        //}
-        //else
-        //{
-        //    animator.SetTrigger("Ide");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            move = new Vector3(horizontal, 0, vertical);
+            PlayerMoving();
+           
 
-        //}
+        }
+
     }
 
     private void PlayerMoving()
@@ -50,7 +52,6 @@ public class PlayerMovement : NetworkBehaviour
         controller.Move(move * speed * Runner.DeltaTime);
         // AnimationSpeed = controller.velocity.magnitude;
     }
-
 
 
 
