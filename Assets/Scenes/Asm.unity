@@ -4592,7 +4592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1468624132}
   SendButton: {fileID: 204062469}
-  ChatContent: {fileID: 674240378}
+  ChatContent: {fileID: 218470870}
 --- !u!114 &2141858657
 MonoBehaviour:
   m_ObjectHideFlags: 0
