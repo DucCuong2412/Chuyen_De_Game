@@ -86,8 +86,8 @@ public class PlayerProperties : NetworkBehaviour
                 camFlow.AsighCamera(other.transform);
                 ///cho gán mỗi cam freelock thoi
 
-               // camFlow.AsighCamera2(other.transform);
-              //  camFlow.AsighCamera3(other.transform);
+                camFlow.AsighCamera2(other.transform);
+                camFlow.AsighCamera3(other.transform);
 
             }
         }
