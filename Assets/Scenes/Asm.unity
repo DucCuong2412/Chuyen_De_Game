@@ -4143,7 +4143,7 @@ GameObject:
   - component: {fileID: 1723128240}
   - component: {fileID: 1723128239}
   m_Layer: 5
-  m_Name: ChatCanvas
+  m_Name: ChatCanvas========
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
