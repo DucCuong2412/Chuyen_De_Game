@@ -25,14 +25,14 @@ public class ChatManager : NetworkBehaviour
     {
         string formatedMessage=$"{playername} :{message}";   
         chatMessage.Add(formatedMessage);
-        ChatUI.ChatContent.text += formatedMessage + "/n";
+        ChatUI.ChatContent.text += formatedMessage + "\n";
 
     }
     public void SendChatMessage(string message)
     {
         string playername=Runner.LocalPlayer.PlayerId.ToString();
         RpcReceiveChatMessage(playername,message);
-        Debug.Log($"{playername} :{message}");
+        Debug.Log($"{playername}: {message}");
     }
 
 
