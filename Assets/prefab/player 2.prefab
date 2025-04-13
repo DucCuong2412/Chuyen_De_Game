@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 4926217255838704135}
   - component: {fileID: 449903842198483693}
   - component: {fileID: 8767132627628727991}
+  - component: {fileID: -4311848232553351781}
   m_Layer: 0
   m_Name: player 2
   m_TagString: Untagged
@@ -383,7 +384,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8732005941977506471}
+  animator: {fileID: 0}
   speedRotate: 10
+  roomManager: {fileID: 0}
   speed: 10
 --- !u!114 &449903842198483693
 MonoBehaviour:
@@ -410,6 +413,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slider: {fileID: 2722394181183419693}
+--- !u!114 &-4311848232553351781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965790708287596447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0870efd0732c4b4ba98b23c29255320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6977430973489038572
 GameObject:
   m_ObjectHideFlags: 0

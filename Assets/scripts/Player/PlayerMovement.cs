@@ -16,29 +16,31 @@ public class PlayerMovement : NetworkBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        roomManager=FindAnyObjectByType<RoomManager>();
+        roomManager = FindAnyObjectByType<RoomManager>();
 
     }
     private void Update()
     {
         Debug.Log(roomManager.isStartGame);
-        
+
     }
     public override void FixedUpdateNetwork()
     {
         if (!Object.HasInputAuthority) return;
-        if (roomManager.isStartGame == false)
-        { return; }
-        else
+        if (roomManager.isStartGame == true)
         {
-
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-            move = new Vector3(horizontal, 0, vertical);
-            PlayerMoving();
-           
+            Move();
 
         }
+
+    }
+    private void Move()
+    {
+
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        move = new Vector3(horizontal, 0, vertical);
+        PlayerMoving();
 
     }
 
@@ -50,8 +52,8 @@ public class PlayerMovement : NetworkBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Runner.DeltaTime);
         }
         controller.Move(move * speed * Runner.DeltaTime);
-        // AnimationSpeed = controller.velocity.magnitude;
     }
+
 
 
 
