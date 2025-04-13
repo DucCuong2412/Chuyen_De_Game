@@ -9,6 +9,7 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 move;
     public RoomManager roomManager;
 
+      public  bool isStartGame = false;
 
 
     public float speed = 5f;
@@ -22,12 +23,21 @@ public class PlayerMovement : NetworkBehaviour
     private void Update()
     {
         Debug.Log(roomManager.isStartGame);
-
+        if (roomManager.isStartGame)
+        {
+            isStartGame = true;
+        }
+        else
+        {
+            isStartGame = false;
+        }
+        
     }
     public override void FixedUpdateNetwork()
     {
+        
         if (!Object.HasInputAuthority) return;
-        if (roomManager.isStartGame == true)
+        if (isStartGame )
         {
             Move();
 
