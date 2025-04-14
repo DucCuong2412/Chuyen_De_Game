@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerATK
   - at
+  - DeadPanel
   layers:
   - Default
   - TransparentFX

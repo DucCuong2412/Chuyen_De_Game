@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerProperties : NetworkBehaviour
 {
     [Networked, OnChangedRender(nameof(OnHealthChanged))]
-
     private int health { get; set; }
+
     public Slider Slider;
+    private GameObject deadPanel;
     private void OnHealthChanged()
     {
         Slider.value = health;
@@ -23,6 +25,12 @@ public class PlayerProperties : NetworkBehaviour
     {
         health = 100;
         Slider.value = health;
+        GameObject panel = GameObject.FindGameObjectWithTag("DeadPanel");
+        if (panel != null)
+        {
+            deadPanel = panel;
+            deadPanel.SetActive(false); // Ẩn lúc mới spawn
+        }
     }
     void Update()
     {
@@ -37,6 +45,11 @@ public class PlayerProperties : NetworkBehaviour
             {
 
                 takeDie();
+                if (deadPanel != null)
+                {
+                  
+                    deadPanel.SetActive(false); // Ẩn lúc mới spawn
+                }
             }
 
 
