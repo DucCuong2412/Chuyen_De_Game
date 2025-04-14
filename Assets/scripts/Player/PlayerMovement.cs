@@ -39,11 +39,11 @@ public class PlayerMovement : NetworkBehaviour
 
     private void PlayerMoving()
     {
-        if (move.sqrMagnitude >= 0.001f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speedRotate * Runner.DeltaTime);
-        }
+        //if (move.sqrMagnitude >= 0.001f)
+        //{
+        //    Quaternion targetRotation = Quaternion.LookRotation(move);
+        //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speedRotate * Runner.DeltaTime);
+        //}
         controller.Move(move * speed * Runner.DeltaTime);
     }
 }

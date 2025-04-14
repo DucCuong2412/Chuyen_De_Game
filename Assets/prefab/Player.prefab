@@ -1802,7 +1802,7 @@ GameObject:
   - component: {fileID: 6910514857893428870}
   - component: {fileID: 6654357638260355525}
   - component: {fileID: 7155964561935891195}
-  - component: {fileID: 9191180222567715802}
+  - component: {fileID: 9156222591398842652}
   - component: {fileID: 3734786808883919731}
   - component: {fileID: 992394144049120022}
   - component: {fileID: 5187368047548505326}
@@ -1884,7 +1884,7 @@ CapsuleCollider:
   m_Height: 4.1134596
   m_Direction: 1
   m_Center: {x: 0.32541513, y: 1.5567298, z: -0.13707566}
---- !u!114 &9191180222567715802
+--- !u!114 &9156222591398842652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 9191180222567715802}
+  - {fileID: 9156222591398842652}
   - {fileID: 5187368047548505326}
   - {fileID: 4736473966917787560}
   - {fileID: 8108736189254714889}
@@ -1962,7 +1962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 992394144049120022}
-  animator: {fileID: 6654357638260355525}
+  animator: {fileID: 0}
   speedRotate: 10
   speed: 5
 --- !u!114 &4736473966917787560

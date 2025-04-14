@@ -10,6 +10,7 @@ public class PlayerProperties : NetworkBehaviour
 
     private int health { get; set; }
     public Slider Slider;
+    public GameObject lost;
     private void OnHealthChanged()
     {
         Slider.value = health;
@@ -74,29 +75,34 @@ public class PlayerProperties : NetworkBehaviour
         yield return new WaitForSeconds(3);
 
         // Tìm player khác còn sống
-        var other = FindOtherAlivePlayer();
-        if (other != null)
-        {
-            Debug.Log("Switching camera to another alive player");
+        //var other = FindOtherAlivePlayer();
+        //if (other != null)
+        //{
+        //    Debug.Log("Switching camera to another alive player");
 
-            // Lấy CameraFlow
-            var camFlow = FindFirstObjectByType<CameraFlow>();
-            if (camFlow != null)
-            {
-                camFlow.AsighCamera(other.transform);
-                ///cho gán mỗi cam freelock thoi
+        //    // Lấy CameraFlow
+        //    var camFlow = FindFirstObjectByType<CameraFlow>();
+        //    if (camFlow != null)
+        //    {
+        //        camFlow.AsighCamera(other.transform);
+        //        ///cho gán mỗi cam freelock thoi
 
-                camFlow.AsighCamera2(other.transform);
-                camFlow.AsighCamera3(other.transform);
+        //        camFlow.AsighCamera2(other.transform);
+        //        camFlow.AsighCamera3(other.transform);
 
-            }
-        }
-        else
-        {
-            Debug.Log("chả làm gì cả vì không tìm thấy player khác");
-        }
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.Log("chả làm gì cả vì không tìm thấy player khác");
+        //}
 
-        Destroy(gameObject);
+
+
+
+        Destroy(gameObject,1f);
+        lost.SetActive(true);
+
     }
 
 
@@ -128,4 +134,8 @@ public class PlayerProperties : NetworkBehaviour
         StartCoroutine(die());
 
     }
+
+
+
+
 }
