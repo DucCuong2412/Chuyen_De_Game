@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomManager : NetworkBehaviour
 {
@@ -21,10 +22,40 @@ public class RoomManager : NetworkBehaviour
     public GameObject button, img;
     public GameObject object1, object2;
 
+    public GameObject winPanel;  // WinPanel để kéo thả vào trong Inspector
+
+    public GameObject deadPanel; // DeadPanel để hiển thị khi chết
+
     public override void Spawned()
     {
         startPanel.SetActive(!GameStarted);
         countdownText.gameObject.SetActive(!isActiveTime);
+
+        // Nếu có InputAuthority thì ẩn WinPanel khi game bắt đầu
+        if (Object.HasInputAuthority && winPanel != null)
+        {
+            winPanel.SetActive(false); // Ẩn WinPanel lúc bắt đầu
+        }
+
+        // Nếu có InputAuthority thì ẩn DeadPanel khi game bắt đầu
+        if (Object.HasInputAuthority && deadPanel != null)
+        {
+            deadPanel.SetActive(false); // Ẩn DeadPanel lúc mới sinh
+        }
+    }
+
+    private void Start()
+    {
+        if (Object.HasInputAuthority && winPanel != null)
+        {
+            winPanel.SetActive(false); // Ẩn WinPanel lúc bắt đầu
+        }
+
+        // Ẩn DeadPanel khi bắt đầu game
+        if (Object.HasInputAuthority && deadPanel != null)
+        {
+            deadPanel.SetActive(false); // Ẩn DeadPanel lúc mới sinh
+        }
     }
 
     private void OnStartGameChanged()
@@ -32,20 +63,53 @@ public class RoomManager : NetworkBehaviour
         button.SetActive(!GameStarted);
         countdownText.gameObject.SetActive(!isActiveTime);
         Debug.Log("Game Started Changed → " + GameStarted);
-
-        Runner.Spawn(object1, new Vector3(Random.Range(1, 3), 0, Random.Range(1, 3)));
-        Runner.Spawn(object2, new Vector3(Random.Range(1, 3), 0, Random.Range(1, 3)));
     }
 
     private void Update()
     {
         UpdatePlayerCount();
+
+        // Kiểm tra sau khi game bắt đầu nếu chỉ còn 1 người sống
+        if (GameStarted && !isActiveTime)
+        {
+            CheckWinCondition();
+        }
     }
 
     public void UpdatePlayerCount()
     {
         playerCount = Runner.ActivePlayers.Count();
         Debug.Log($"Player count: {playerCount}");
+    }
+
+    // Kiểm tra điều kiện thắng khi chỉ còn 1 người sống
+    private void CheckWinCondition()
+    {
+        var allPlayers = FindObjectsOfType<PlayerProperties>();
+        int alivePlayers = 0;
+        PlayerProperties winner = null;
+
+        foreach (var player in allPlayers)
+        {
+            if (player != null && player.health > 0)
+            {
+                alivePlayers++;
+                winner = player;  // Cập nhật người sống cuối cùng
+            }
+        }
+
+        // Nếu chỉ còn 1 người sống, hiển thị winPanel
+        if (alivePlayers == 1)
+        {
+            if (winPanel != null)
+            {
+                if (winner != null && winner.HasInputAuthority)
+                {
+                    winPanel.SetActive(true); // Chỉ hiển thị winPanel cho người chơi còn sống và có quyền điều khiển
+                    Debug.Log("Một người còn sống, hiển thị WinPanel!");
+                }
+            }
+        }
     }
 
     public void StartGame()

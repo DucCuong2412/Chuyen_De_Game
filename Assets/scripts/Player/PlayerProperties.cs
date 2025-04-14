@@ -8,7 +8,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class PlayerProperties : NetworkBehaviour
 {
     [Networked, OnChangedRender(nameof(OnHealthChanged))]
-    private int health { get; set; }
+    public int health { get; set; }
 
     public Slider Slider;
     private GameObject deadPanel;
@@ -30,6 +30,11 @@ public class PlayerProperties : NetworkBehaviour
         {
             deadPanel = panel;
             deadPanel.SetActive(false); // Ẩn lúc mới spawn
+            Debug.Log("Dead panel found and set to inactive.==========");
+        }
+        else
+        {
+            Debug.Log("11111111nullllllllllll==========");
         }
     }
     void Update()
@@ -44,12 +49,19 @@ public class PlayerProperties : NetworkBehaviour
             if (health <= 0)
             {
 
-                takeDie();
+              
                 if (deadPanel != null)
                 {
                   
-                    deadPanel.SetActive(false); // Ẩn lúc mới spawn
+                    deadPanel.SetActive(true); // Ẩn lúc mới spawn
+                    Debug.Log("Dead panel found and set to inactive.==========");
+
                 }
+                else
+                {
+                    Debug.Log("Dnullllllllllll==========");
+                }
+                takeDie();
             }
 
 

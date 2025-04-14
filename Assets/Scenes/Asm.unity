@@ -1269,6 +1269,7 @@ MonoBehaviour:
   img: {fileID: 1659577730}
   object1: {fileID: 1252103370025742, guid: c69ca5d4562934b8c8d61b46a4214978, type: 3}
   object2: {fileID: 1748299038737836, guid: 2177dc4f0f0bf4715a8307d8c5d17d2f, type: 3}
+  winPanel: {fileID: 2052368632}
 --- !u!4 &393205239
 Transform:
   m_ObjectHideFlags: 0
@@ -3963,7 +3964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1556925934
 RectTransform:
   m_ObjectHideFlags: 0
