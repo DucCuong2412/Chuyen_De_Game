@@ -93,12 +93,14 @@ public class RoomManager : NetworkBehaviour
         int alivePlayers = 0;
         PlayerProperties winner = null;
 
+
         foreach (var player in allPlayers)
         {
             if (player != null && player.health > 0)
             {
                 alivePlayers++;
                 winner = player;  // Cập nhật người sống cuối cùng
+
             }
         }
 
@@ -111,6 +113,7 @@ public class RoomManager : NetworkBehaviour
                 {
                     winPanel.SetActive(true); // Chỉ hiển thị winPanel cho người chơi còn sống và có quyền điều khiển
                     Debug.Log("Một người còn sống, hiển thị WinPanel!");
+
                 }
             }
         }

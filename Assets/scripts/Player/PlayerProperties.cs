@@ -1,6 +1,9 @@
 ﻿using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
@@ -10,8 +13,66 @@ public class PlayerProperties : NetworkBehaviour
     [Networked, OnChangedRender(nameof(OnHealthChanged))]
     public int health { get; set; }
 
+    [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
+    public string playerName { get; set; }
+
+    public TextMeshProUGUI playerNameText;
+
     public Slider Slider;
     private GameObject deadPanel;
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    public void RPC_SetPlayerName(string name)
+    {
+        playerName = name;
+    }
+    private void OnPlayerNameChanged()
+    {
+        if (playerNameText != null)
+        {
+            playerNameText.text = playerName;
+            Debug.Log($"Tên đã được cập nhật: {playerName}");
+        }
+    }
+
+
+    public void SetPlayerName(string name)
+    {
+        if (HasInputAuthority) // Chỉ người chơi sở hữu đối tượng mới có thể thay đổi tên
+        {
+            playerName = name;
+            if (playerNameText != null)
+            {
+                playerNameText.text = playerName;
+
+            }
+        }
+    }
+    public override void FixedUpdateNetwork()
+    {
+        if (!HasInputAuthority) return;
+
+
+        playerNameText.text = playerName;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void OnHealthChanged()
     {
         Slider.value = health;
@@ -49,10 +110,10 @@ public class PlayerProperties : NetworkBehaviour
             if (health <= 0)
             {
 
-              
+
                 if (deadPanel != null)
                 {
-                  
+
                     deadPanel.SetActive(true); // Ẩn lúc mới spawn
                     Debug.Log("Dead panel found and set to inactive.==========");
 

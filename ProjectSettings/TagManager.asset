@@ -7,6 +7,9 @@ TagManager:
   - PlayerATK
   - at
   - DeadPanel
+  - PanelName
+  - Button
+  - Input
   layers:
   - Default
   - TransparentFX
