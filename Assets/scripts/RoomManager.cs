@@ -12,6 +12,8 @@ public class RoomManager : NetworkBehaviour
     public NetworkBool GameStarted { get; set; }
 
     [Networked] public NetworkBool isActiveTime { get; set; }
+    public static bool IsGameStarted = false;
+
 
     public int playerCount { get; set; }
 
@@ -30,6 +32,7 @@ public class RoomManager : NetworkBehaviour
     {
         startPanel.SetActive(!GameStarted);
         countdownText.gameObject.SetActive(!isActiveTime);
+        IsGameStarted = GameStarted;
 
         // Nếu có InputAuthority thì ẩn WinPanel khi game bắt đầu
         if (Object.HasInputAuthority && winPanel != null)
@@ -60,6 +63,7 @@ public class RoomManager : NetworkBehaviour
 
     private void OnStartGameChanged()
     {
+        IsGameStarted = GameStarted;
         button.SetActive(!GameStarted);
         countdownText.gameObject.SetActive(!isActiveTime);
         Debug.Log("Game Started Changed → " + GameStarted);
@@ -78,7 +82,7 @@ public class RoomManager : NetworkBehaviour
 
     public void UpdatePlayerCount()
     {
-        playerCount = Runner.ActivePlayers.Count();
+        playerCount = Runner.ActivePlayers.Count();//mỗi người join vào game sẽ tự động  cộng  id người chơi đó lên 1 đơn v
         Debug.Log($"Player count: {playerCount}");
     }
 
@@ -112,20 +116,22 @@ public class RoomManager : NetworkBehaviour
         }
     }
 
+    [SerializeField] private int maxPlayers = 2; // chỉnh được trong Unity
+
     public void StartGame()
     {
         if (HasStateAuthority && Runner.LocalPlayer.PlayerId == 1)
         {
-            if (playerCount <= 2)
+            if (playerCount >= maxPlayers)
             {
                 RpcStartCountdown();
                 GameStarted = true;
-                Debug.Log(Runner.LocalPlayer.PlayerId + " is Host");
+                Debug.Log("Host bắt đầu game.");
             }
-        }
-        else
-        {
-            Debug.Log(Runner.LocalPlayer.PlayerId + " is not Host");
+            else
+            {
+                Debug.Log("Chưa đủ người chơi để bắt đầu game.");
+            }
         }
     }
 

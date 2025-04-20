@@ -19,14 +19,13 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (!Object.HasInputAuthority || roomManager == null)
+        if (!Object.HasInputAuthority)
             return;
 
         // Di chuyển khi GameStarted = true
-        if (roomManager.GameStarted)
-        {
-            Move();
-        }
+        
+           Move();
+        
     }
 
     private void Move()
