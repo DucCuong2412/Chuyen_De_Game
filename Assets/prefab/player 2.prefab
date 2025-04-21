@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: -4311848232553351781}
   m_Layer: 0
   m_Name: player 2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -548,6 +548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 0
   _playerName: 
+  _score: 0
   playerNameText: {fileID: 5537076404062648939}
   Slider: {fileID: 2722394181183419693}
 --- !u!114 &-4311848232553351781

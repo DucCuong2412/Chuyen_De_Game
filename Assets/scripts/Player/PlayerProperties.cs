@@ -90,16 +90,16 @@ public class PlayerProperties : NetworkBehaviour
     {
         score += amout;
     }
-    
+
     [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
     public void RPC_RequestDespawn(NetworkId objectId)
     {
         NetworkObject obj = Runner.FindObject(objectId);
         if (obj != null)
         {
-            Runner.Despawn(obj);
-            Debug.Log("Đã xóa obj");
-            
+            gameObject.SetActive(false);
+            Debug.Log("Đã ẩn obj");
+
         }
     }
 
@@ -179,21 +179,23 @@ public class PlayerProperties : NetworkBehaviour
             {
                 addScore(1);
                 Debug.Log("score+=10");
-                NetworkObject scoreObj = other.GetComponent<NetworkObject>();
-                if (scoreObj != null)
-                {
-                    if (scoreObj.HasStateAuthority)
-                    {
-                        Runner.Despawn(scoreObj); // Host có quyền thì xóa luôn
-                        Debug.Log("Host is despawning: "+scoreObj.name);
-                    }
-                    else
-                    {
-                        // Gửi NetworkId cho host yêu cầu xóa
-                        Debug.LogWarning("Không có quyền StateAuthority để xóa");
-                        RPC_RequestDespawn(scoreObj.Id);
-                    }
-                }
+                //NetworkObject scoreObj = other.GetComponent<NetworkObject>();
+                //if (scoreObj != null)
+                //{
+                //    if (scoreObj.HasStateAuthority)
+                //    {
+                //        // Runner.Despawn(scoreObj); // Host có quyền thì xóa luôn
+
+                //        gameObject.SetActive(false);
+                //        Debug.Log("Host is despawning: " + scoreObj.name);
+                //    }
+                //    else
+                //    {
+                //        // Gửi NetworkId cho host yêu cầu xóa
+                //        Debug.LogWarning("Không có quyền StateAuthority để xóa");
+                //        RPC_RequestDespawn(scoreObj.Id);
+                //    }
+                //}
 
             }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3804820809373335161}
   - component: {fileID: 3577148145926262431}
   - component: {fileID: 2157515719398242604}
+  - component: {fileID: 9146285791991370276}
   m_Layer: 0
   m_Name: score
   m_TagString: Score
@@ -126,6 +127,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 2157515719398242604}
+  - {fileID: 9146285791991370276}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &2157515719398242604
 MonoBehaviour:
@@ -144,3 +146,15 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &9146285791991370276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044695625694495363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e05d2583403f5943be3df38c59b3981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
