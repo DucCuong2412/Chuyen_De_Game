@@ -48,6 +48,7 @@ public class PlayerSpwaner : SimulationBehaviour, IPlayerJoined
                 // Bật UI nhập tên
                 nameInputPanel.SetActive(true);
                 confirmNameButton.onClick.RemoveAllListeners();
+                // Xóa tất cả các listener trước đó để tránh xung đột`
                 confirmNameButton.onClick.AddListener(() =>
                 {
                     string name = nameInputField.text;
@@ -55,6 +56,8 @@ public class PlayerSpwaner : SimulationBehaviour, IPlayerJoined
                     {
                         localPlayerProps.SetPlayerName(name);
                         nameInputPanel.SetActive(false);
+
+
                     }
                 });
             }

@@ -1,12 +1,11 @@
 ﻿using Fusion;
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
+
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
+
 
 public class PlayerProperties : NetworkBehaviour
 {
@@ -15,6 +14,13 @@ public class PlayerProperties : NetworkBehaviour
 
     [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
     public string playerName { get; set; }
+
+
+    [Networked]
+    public int score { get; set; }
+
+
+
 
     public TextMeshProUGUI playerNameText;
 
@@ -31,6 +37,7 @@ public class PlayerProperties : NetworkBehaviour
         if (playerNameText != null)
         {
             playerNameText.text = playerName;
+
             Debug.Log($"Tên đã được cập nhật: {playerName}");
         }
     }
@@ -59,29 +66,51 @@ public class PlayerProperties : NetworkBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void OnHealthChanged()
+    public void addScore(int amount)
     {
-        Slider.value = health;
-        Debug.Log($" heath changed to {health}");
-        if (health <= 0)
+        if (HasInputAuthority) // Chỉ người chơi sở hữu đối tượng mới có thể thay đổi tên
         {
-            Debug.Log("player is dead");
+            score += amount;
+
+        }
+        else
+        {
+            RPC_addScore(amount);
+
+
+
+        }
+
+
+    }
+
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]// gọi host ra để cùng nhau đồng bộ
+    void RPC_addScore(int amout)
+    {
+        score += amout;
+    }
+    
+    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
+    public void RPC_RequestDespawn(NetworkId objectId)
+    {
+        NetworkObject obj = Runner.FindObject(objectId);
+        if (obj != null)
+        {
+            Runner.Despawn(obj);
+            Debug.Log("Đã xóa obj");
+            
         }
     }
+
+
+
+
+
+
+
+
+
     private void Start()
     {
         health = 100;
@@ -146,6 +175,27 @@ public class PlayerProperties : NetworkBehaviour
 
                 Debug.Log("heal-=10");
             }
+            if (other.gameObject.CompareTag("Score"))
+            {
+                addScore(1);
+                Debug.Log("score+=10");
+                NetworkObject scoreObj = other.GetComponent<NetworkObject>();
+                if (scoreObj != null)
+                {
+                    if (scoreObj.HasStateAuthority)
+                    {
+                        Runner.Despawn(scoreObj); // Host có quyền thì xóa luôn
+                        Debug.Log("Host is despawning: "+scoreObj.name);
+                    }
+                    else
+                    {
+                        // Gửi NetworkId cho host yêu cầu xóa
+                        Debug.LogWarning("Không có quyền StateAuthority để xóa");
+                        RPC_RequestDespawn(scoreObj.Id);
+                    }
+                }
+
+            }
 
         }
 
@@ -183,6 +233,15 @@ public class PlayerProperties : NetworkBehaviour
         }
 
         Destroy(gameObject);
+    }
+    private void OnHealthChanged()
+    {
+        Slider.value = health;
+        Debug.Log($" heath changed to {health}");
+        if (health <= 0)
+        {
+            Debug.Log("player is dead");
+        }
     }
 
 

@@ -10,6 +10,7 @@ TagManager:
   - PanelName
   - Button
   - Input
+  - Score
   layers:
   - Default
   - TransparentFX
