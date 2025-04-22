@@ -7,24 +7,38 @@ public class CameraFlow : MonoBehaviour
 {
     public CinemachineFreeLook virtualCamera;
     public CinemachineVirtualCamera virtualCamera2, virtualCamera3;
+    private int Count = 1;
 
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Count++;
+
+        }
+        if (Count == 4)
+        {
+            Count = 1;
+
+
+        }
+
+
+        if (Count == 1)
         {
             virtualCamera.Priority = 10;
             virtualCamera2.Priority = 0;
             virtualCamera3.Priority = 0;
 
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Count == 2)
         {
             virtualCamera.Priority = 0;
             virtualCamera2.Priority = 10;
             virtualCamera3.Priority = 0;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Count == 3)
         {
             virtualCamera.Priority = 0;
             virtualCamera2.Priority = 0;
