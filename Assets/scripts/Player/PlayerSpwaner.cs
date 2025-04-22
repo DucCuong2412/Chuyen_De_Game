@@ -2,6 +2,7 @@
 using Fusion;
 using System.Linq;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerSpwaner : SimulationBehaviour, IPlayerJoined
 {
@@ -63,7 +64,9 @@ public class PlayerSpwaner : SimulationBehaviour, IPlayerJoined
             }
         );
         }
+
     }
+
 
 }
 

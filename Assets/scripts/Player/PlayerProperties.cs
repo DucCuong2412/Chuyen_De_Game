@@ -3,6 +3,7 @@ using System.Collections;
 
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 public class PlayerProperties : NetworkBehaviour
 {
     [Networked, OnChangedRender(nameof(OnHealthChanged))]
-    public int health { get; set; }
+    public int health { get; set; } = 100;
 
     [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
     public string playerName { get; set; }
@@ -26,6 +27,9 @@ public class PlayerProperties : NetworkBehaviour
 
     public Slider Slider;
     private GameObject deadPanel;
+
+
+    private Respawn respawn;
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_SetPlayerName(string name)
@@ -146,12 +150,27 @@ public class PlayerProperties : NetworkBehaviour
                     deadPanel.SetActive(true); // Ẩn lúc mới spawn
                     Debug.Log("Dead panel found and set to inactive.==========");
 
+                    respawn = GetComponent<Respawn>();
+                    if (respawn != null)
+                    {
+                        
+
+                        Debug.Log("player is dead=========== ddang chowf hooi sinh");
+                    }
+                    else
+                    {
+                        Debug.Log("player nullllll.");
+                    }
+
+
                 }
                 else
                 {
                     Debug.Log("Dnullllllllllll==========");
                 }
+
                 takeDie();
+
             }
 
 
@@ -234,7 +253,7 @@ public class PlayerProperties : NetworkBehaviour
             Debug.Log("chả làm gì cả vì không tìm thấy player khác");
         }
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
     private void OnHealthChanged()
     {
@@ -272,7 +291,17 @@ public class PlayerProperties : NetworkBehaviour
 
     public void takeDie()
     {
-        StartCoroutine(die());
+        if (Object.HasStateAuthority) // Chỉ host mới được gọi Despawn
+        {
+            var respawnManager = FindObjectOfType<Respawn>();
+            if (respawnManager != null)
+            {
+                respawnManager.RespawnPlayer(Object.InputAuthority);
+            }
 
+            Runner.Despawn(Object); // Despawn chính player object này
+        }
+
+        StartCoroutine(die());
     }
 }
